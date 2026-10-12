@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Resource viewer{% endblock %}
+{% block content %}
+  <h2>Resource viewer</h2>
+
+  <h3>Catalogue</h3>
+    <ul class="catalog">
+    {% for r in catalogue %}
+      <li>
+        <a href="{{ url_for('resource', file=r['filename']) }}">{{ r['title'] }}</a>
+        <small><code>{{ r['filename'] }}</code> — {{ r['description'] }}</small>
+      </li>
+    {% endfor %}
+  </ul>
+
+  {% if filename %}
+    <hr>
+    <h3>File: <code>{{ filename }}</code></h3>
+
+    {% if error %}
+      <p class="error">{{ error }}</p>
+    {% endif %}
+
+    {% if content is not none %}
+      <pre>{{ content }}</pre>
+    {% endif %}
+  {% endif %}
+{% endblock %}

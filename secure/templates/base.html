@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}SecLab{% endblock %} — SecLab Training Portal</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="logo">SL</span>
+    <span class="brand-name">SecLab Training Portal</span>
+    <span class="badge badge-lab">lab</span>
+  </div>
+  <div class="topbar-right">
+    {% if current_user() %}
+      <span class="who">Signed in as <strong>{{ current_user()['username'] }}</strong></span>
+      <a class="btn btn-ghost" href="{{ url_for('logout') }}">Logout</a>
+    {% else %}
+      <a class="btn btn-ghost" href="{{ url_for('login') }}">Login</a>
+      <a class="btn btn-primary" href="{{ url_for('register') }}">Register</a>
+    {% endif %}
+  </div>
+</header>
+
+<div class="layout">
+  <aside class="sidebar">
+    <nav>
+      <h4>Main</h4>
+      <a href="{{ url_for('index') }}">Home</a>
+      <a href="{{ url_for('search') }}">Search</a>
+
+      {% if current_user() %}
+        <h4>Tools</h4>
+       
+        <a href="{{ url_for('comments') }}">Comments</a>
+        <a href="{{ url_for('diagnostic') }}">Network diagnostic</a>
+        <a href="{{ url_for('resource') }}">Resource viewer</a>
+
+        <h4>Account</h4>
+        <a href="{{ url_for('profile') }}">My profile</a>
+        <a href="{{ url_for('logout') }}">Logout</a>
+      {% else %}
+        <h4>Account</h4>
+        <a href="{{ url_for('login') }}">Login</a>
+        <a href="{{ url_for('register') }}">Register</a>
+      {% endif %}
+    </nav>
+
+    <div class="sidebar-foot">
+      <small>Loopback only. Never expose this app.</small>
+    </div>
+  </aside>
+
+  <main class="content">
+    {% block content %}{% endblock %}
+  </main>
+</div>
+
+<footer class="footer">
+  <small>Educational security laboratory &middot; Flask + SQLite &middot; {{ 'vulnerable' if 'vulnerable' in config.get('APP_NAME','') else 'secure' }} build</small>
+</footer>
+
+</body>
+</html>

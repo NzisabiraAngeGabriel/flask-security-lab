@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+  <h2>Welcome to the SecLab Training Portal</h2>
+  <p>
+    This portal is the front-end for the <strong>Flask Security Lab</strong> — an
+    intentionally vulnerable web application built for local, controlled security
+    training. It ships in two builds running side by side:
+  </p>
+
+  <div class="cards">
+    <div class="card">
+      <h3>Vulnerable build</h3>
+      <p><code>http://127.0.0.1:5000</code></p>
+      <p><small>Contains four deliberately unsafe endpoints for demonstration.</small></p>
+    </div>
+    <div class="card">
+      <h3>Secure build</h3>
+      <p><code>http://127.0.0.1:5001</code></p>
+      <p><small>Same functionality, hardened against the same four attacks.</small></p>
+    </div>
+  </div>
+
+  <h3>What you can practise here</h3>
+  <ul>
+    <li><strong>SQL injection</strong> on the resource search endpoint.</li>
+    <li><strong>Stored XSS</strong> on the comments feed.</li>
+    <li><strong>OS command injection</strong> on the network diagnostic tool.</li>
+    <li><strong>Directory traversal</strong> on the resource viewer.</li>
+  </ul>
+
+  <h3>Getting started</h3>
+  <ol>
+    <li>Register a new account, or log in as <code>alice / password123</code> or <code>bob / hunter2</code>.</li>
+    <li>Explore the tools in the sidebar. Each is safe to use as intended.</li>
+    <li>For the security demonstrations, see the lab write-up.</li>
+  </ol>
+
+  <p class="stub">
+    This application is bound to <strong>127.0.0.1</strong> and must never be
+    exposed to a network. All test payloads stay on this machine.
+  </p>
+{% endblock %}

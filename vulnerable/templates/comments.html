@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Comments{% endblock %}
+{% block content %}
+    <h2>Comments</h2>
+  <p>Post a message for other signed-in users. Newest comments appear first.</p>
+
+  <form method="post" action="{{ url_for('comments') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label>New comment
+      <textarea name="body" rows="3" maxlength="1000" required></textarea>
+    </label>
+    <button type="submit">Post</button>
+  </form>
+
+  <hr>
+
+  {% if comments %}
+    <ul class="comments">
+      {% for c in comments %}
+        <li>
+          <div class="meta">
+            <strong>{{ c['username'] }}</strong>
+            <small> &mdash; {{ c['created_at'] }}</small>
+          </div>
+          <div class="body">
+            {{ c['body'] | safe }}
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No comments yet.</p>
+  {% endif %}
+{% endblock %}

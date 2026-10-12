@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Diagnostic{% endblock %}
+{% block content %}
+    <h2>Network diagnostic</h2>
+  <p>Run a single ping against a hostname or IP. Requires a valid login.</p>
+  <p>Enter a hostname or IP address to ping once.</p>
+
+  <form method="post" action="{{ url_for('diagnostic') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label>Host
+      <input name="host" value="{{ host }}" required autofocus>
+    </label>
+    <button type="submit">Run ping</button>
+  </form>
+
+  {% if error %}
+    <p class="error">{{ error }}</p>
+  {% endif %}
+
+  {% if output %}
+    <h3>Output</h3>
+    <pre>{{ output }}</pre>
+  {% endif %}
+{% endblock %}

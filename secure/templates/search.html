@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Search{% endblock %}
+{% block content %}
+    <h2>Search resources</h2>
+  <p>Search the resource catalogue by title keyword.</p>
+
+  <form method="get" action="{{ url_for('search') }}">
+    <label>Keyword
+      <input name="q" value="{{ q }}" autofocus>
+    </label>
+    <button type="submit">Search</button>
+  </form>
+
+  {% if error %}
+    <p class="error">{{ error }}</p>
+  {% endif %}
+
+  {% if q %}
+    <h3>Results for &ldquo;{{ q }}&rdquo;</h3>
+    {% if results %}
+      <ul>
+        {% for r in results %}
+          <li>
+            <strong>{{ r['title'] }}</strong>
+            &mdash; <code>{{ r['filename'] }}</code>
+            <br><small>{{ r['description'] }}</small>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No matches.</p>
+    {% endif %}
+  {% endif %}
+{% endblock %}

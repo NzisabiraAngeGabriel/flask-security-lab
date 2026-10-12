@@ -1,0 +1,25 @@
+# Virtual environment — not source code, huge, machine-specific
+.venv/
+venv/
+env/
+
+# SQLite databases — local lab state, regenerated on first run
+*.db
+*.sqlite
+*.sqlite3
+
+# Python bytecode / cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Flask / IDE / OS cruft
+.vscode/
+.idea/
+*.swp
+Thumbs.db
+.DS_Store
+
+# Local notes you might keep for yourself
+*.local
+scratch/
